@@ -75,4 +75,4 @@
 * body
 
 
-(thanks [reidrac](http://github.com/reidrac))
+(thanks [reidrac](http://github.com/reidrac), [MrReidrac](https://twitch.tv/reidrac))
