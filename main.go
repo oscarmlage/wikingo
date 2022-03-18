@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Hola mundo")
+	fmt.Println("Starting wikingo...")
+
 	server.Serve()
 }
