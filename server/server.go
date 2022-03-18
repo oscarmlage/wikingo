@@ -6,14 +6,16 @@ import (
 	"log"
 )
 
-// Depending on config we should open one store or other (Gorm, File,
-// Git...)
 var (
-	store model.StoreGorm
+	store model.Store
 )
 
 func Serve() {
+
 	// Store instance
+	// Depending on config we should open one store or other
+	// (Gorm, File, Git...)
+	store = new(model.StoreGorm)
 	err := store.Open()
 	if err != nil {
 		log.Panicln(err)
