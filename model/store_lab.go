@@ -10,17 +10,17 @@ type StoreLab struct {
 }
 
 func (s *StoreLab) Open() {
-	fmt.Printf("File: Store Open")
+	fmt.Printf("Lab: Store Open")
 }
 
 func (s *StoreLab) AddPage() {
-	fmt.Println("File: Page created")
+	fmt.Println("Lab: Page created")
 }
 
 func (s *StoreLab) GetPage() {
-	fmt.Println("File: Get Page")
+	fmt.Println("Lab: Get Page")
 }
 
 func (s *StoreLab) GetAllPages() {
-	fmt.Println("File: Get All Pages")
+	fmt.Println("Lab: Get All Pages")
 }
