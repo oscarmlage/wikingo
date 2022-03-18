@@ -6,5 +6,4 @@ type Store interface {
 	AddPage()
 	GetPage() Page
 	GetAllPages() ([]Page, error)
-	Noexiste()
 }
