@@ -26,7 +26,8 @@ func WikiPage(c echo.Context) error {
 		}
 	}
 	fmt.Printf("res: %T\n", page)
-	unsafe := blackfriday.Run([]byte(page.Body))
+	body := strings.ReplaceAll(page.Body, "\r\n", "\n")
+	unsafe := blackfriday.Run([]byte(body))
 	html := bluemonday.UGCPolicy().SanitizeBytes(unsafe)
 	return c.Render(http.StatusOK, "page.html", map[string]interface{}{
 		"page": page,
