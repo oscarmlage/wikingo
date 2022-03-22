@@ -10,22 +10,7 @@ import (
 )
 
 func WikiHome(c echo.Context) error {
-	var err error
-	page, err := store.GetPage("WikiHome")
-	if err != nil {
-		fmt.Println(err.Error())
-		err := store.AddPage("WikiHome", "This is the home of the wiki")
-		if err != nil {
-			log.Panicln(err.Error())
-		}
-	}
-	fmt.Printf("res: %T\n", page)
-	unsafe := blackfriday.Run([]byte(page.Body))
-	html := bluemonday.UGCPolicy().SanitizeBytes(unsafe)
-	return c.Render(http.StatusOK, "page.html", map[string]interface{}{
-		"page": page,
-		"html": string(html[:]),
-	})
+	return c.Redirect(http.StatusMovedPermanently, "/WikiHome")
 }
 
 func WikiPage(c echo.Context) error {
