@@ -41,13 +41,17 @@ func (s *StoreGorm) AddPage(name string, body string) error {
 }
 
 func (s *StoreGorm) CreatePage(page Page) error {
-	tx := s.db.Save(&page)
+	newversion := new(Page)
+	newversion.Name = page.Name
+	newversion.Body = page.Body
+	newversion.Version = page.Version + 1
+	tx := s.db.Save(newversion)
 	return tx.Error
 }
 
 func (s *StoreGorm) GetPage(name string) (Page, error) {
 	var page Page
-	tx := s.db.Where("Name = ?", name).First(&page)
+	tx := s.db.Where("Name = ?", name).Order("Version desc").First(&page)
 	if tx.Error != nil {
 		return Page{}, tx.Error
 	}
