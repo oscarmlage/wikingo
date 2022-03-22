@@ -2,11 +2,13 @@ package server
 
 import (
 	"fmt"
+	"log"
+	"net/http"
+	"strings"
+
 	"github.com/labstack/echo/v4"
 	"github.com/microcosm-cc/bluemonday"
 	"github.com/russross/blackfriday/v2"
-	"log"
-	"net/http"
 )
 
 func WikiHome(c echo.Context) error {
