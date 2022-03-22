@@ -3,6 +3,8 @@ package server
 import (
 	"fmt"
 	"github.com/labstack/echo/v4"
+	"github.com/microcosm-cc/bluemonday"
+	"github.com/russross/blackfriday/v2"
 	"log"
 	"net/http"
 )
@@ -18,8 +20,11 @@ func WikiHome(c echo.Context) error {
 		}
 	}
 	fmt.Printf("res: %T\n", page)
+	unsafe := blackfriday.Run([]byte(page.Body))
+	html := bluemonday.UGCPolicy().SanitizeBytes(unsafe)
 	return c.Render(http.StatusOK, "page.html", map[string]interface{}{
 		"page": page,
+		"html": string(html[:]),
 	})
 }
 
@@ -36,8 +41,11 @@ func WikiPage(c echo.Context) error {
 		}
 	}
 	fmt.Printf("res: %T\n", page)
+	unsafe := blackfriday.Run([]byte(page.Body))
+	html := bluemonday.UGCPolicy().SanitizeBytes(unsafe)
 	return c.Render(http.StatusOK, "page.html", map[string]interface{}{
 		"page": page,
+		"html": string(html[:]),
 	})
 }
 

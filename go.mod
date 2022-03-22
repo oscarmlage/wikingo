@@ -2,9 +2,17 @@ module github.com/oscarmlage/wikingo
 
 go 1.17
 
-require github.com/labstack/echo/v4 v4.7.1
+require (
+	github.com/labstack/echo/v4 v4.7.1
+	github.com/microcosm-cc/bluemonday v1.0.18
+	github.com/russross/blackfriday/v2 v2.1.0
+	gorm.io/driver/sqlite v1.3.1
+	gorm.io/gorm v1.23.2
+)
 
 require (
+	github.com/aymerick/douceur v0.2.0 // indirect
+	github.com/gorilla/css v1.0.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.4 // indirect
 	github.com/labstack/gommon v0.3.1 // indirect
@@ -17,6 +25,4 @@ require (
 	golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f // indirect
 	golang.org/x/sys v0.0.0-20211103235746-7861aae1554b // indirect
 	golang.org/x/text v0.3.7 // indirect
-	gorm.io/driver/sqlite v1.3.1 // indirect
-	gorm.io/gorm v1.23.2 // indirect
 )

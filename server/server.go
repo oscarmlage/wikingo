@@ -47,7 +47,12 @@ func Serve() {
 	// Instantiate a template registry with an array of template set
 	// Ref: https://gist.github.com/rand99/808e6e9702c00ce64803d94abff65678
 	templates := make(map[string]*template.Template)
-	templates["page.html"] = template.Must(template.ParseFiles("views/page.html", "views/base.html"))
+
+	templates["page.html"] = template.Must(template.New("page.html").Funcs(template.FuncMap{
+		"safeHTML": func(s string) template.HTML {
+			return template.HTML(s)
+		},
+	}).ParseFiles("views/page.html", "views/base.html"))
 	templates["list.html"] = template.Must(template.ParseFiles("views/list.html", "views/base.html"))
 	templates["edit.html"] = template.Must(template.ParseFiles("views/edit.html", "views/base.html"))
 	templates["about.html"] = template.Must(template.ParseFiles("views/about.html", "views/base.html"))

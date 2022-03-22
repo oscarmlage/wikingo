@@ -4,8 +4,7 @@
 
 {{define "body"}}
     <h1>{{ .page.Name }}</h1>
-    <h2>{{ .page.Name }}</h2>
-    {{ .page.Body }}
+    {{ .html | safeHTML }}
     <hr />
     <a href="{{ .page.Name }}/edit">Edit</a>
     <p style="float: right">Last modified: {{ .page.UpdatedAt }}</p>
