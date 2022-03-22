@@ -2,6 +2,7 @@ package model
 
 import (
 	"fmt"
+
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -26,15 +27,32 @@ func (s *StoreGorm) Open() error {
 	return nil
 }
 
-func (s *StoreGorm) AddPage() {
-	s.db.Create(&Page{Code: "D55", Price: 200})
+func (s *StoreGorm) AddPage(name string, body string) error {
+	var home Page
+	home.Name = name
+	home.Body = body
+	home.Version = 1
+	tx := s.db.Create(&home)
+	if tx.Error != nil {
+		return tx.Error
+	}
 	fmt.Println("Page created")
+	return nil
 }
 
-func (s *StoreGorm) GetPage() Page {
+func (s *StoreGorm) CreatePage(page Page) error {
+	tx := s.db.Save(&page)
+	return tx.Error
+}
+
+func (s *StoreGorm) GetPage(name string) (Page, error) {
 	var page Page
-	s.db.First(&page)
-	return page
+	tx := s.db.Where("Name = ?", name).First(&page)
+	if tx.Error != nil {
+		return Page{}, tx.Error
+	}
+	fmt.Println(page)
+	return page, nil
 }
 
 func (s *StoreGorm) GetAllPages() ([]Page, error) {

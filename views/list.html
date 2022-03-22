@@ -1,0 +1,12 @@
+{{define "title"}}
+  Wikingo - List
+{{end}}
+
+{{define "body"}}
+    <h1>List</h1>
+    <ul>
+        {{ range .pages }}
+        <li><a href="{{ .Name }}">{{ .Name }}</a>.- {{ .Body }}</li>
+        {{ end }}
+    </ul>
+{{end}}

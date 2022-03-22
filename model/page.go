@@ -6,6 +6,7 @@ import (
 
 type Page struct {
 	gorm.Model
-	Code  string
-	Price uint
+	Name    string
+	Body    string
+	Version uint
 }

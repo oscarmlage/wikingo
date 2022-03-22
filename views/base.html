@@ -1,17 +1,19 @@
-{{define "base.html"}}
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <title>{{template "title" .}}</title>
-    </head>
-    <body>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-            </ul>
-        </nav>
-      {{template "body" .}}
-    </body>
-  </html>
+{{ define "base.html" }}
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>{{ template "title" . }}</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+        </head>
+        <body>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/list">List</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </nav>
+            {{ template "body" . }}
+        </body>
+    </html>
 {{end}}

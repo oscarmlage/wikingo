@@ -1,0 +1,12 @@
+{{define "title"}}
+  Wikingo | {{index . "name"}}
+{{end}}
+
+{{define "body"}}
+    <h1>Page not found</h1>
+    <h2>Actions:</h2>
+    <ul>
+        <li>Create <a href="{{ .name }}/edit">{{ .name }}</a></li>
+        <li>Go to <a href="/">WikiHome</a></li>
+    </ul>
+{{end}}

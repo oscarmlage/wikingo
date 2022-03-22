@@ -3,7 +3,8 @@ package model
 // Store interface
 type Store interface {
 	Open() error
-	AddPage()
-	GetPage() Page
+	AddPage(string, string) error
+	CreatePage(Page) error
+	GetPage(string) (Page, error)
 	GetAllPages() ([]Page, error)
 }
