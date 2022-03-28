@@ -1,8 +1,6 @@
 package model
 
 import (
-	"fmt"
-
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -19,7 +17,6 @@ func (s *StoreGorm) Open() error {
 	if err != nil {
 		return err
 	}
-	fmt.Printf("%s\n", s.db.Name())
 
 	// Migrate the Schema
 	s.db.AutoMigrate(&Page{})
@@ -36,7 +33,6 @@ func (s *StoreGorm) AddPage(name string, body string) error {
 	if tx.Error != nil {
 		return tx.Error
 	}
-	fmt.Println("Page created")
 	return nil
 }
 
@@ -55,7 +51,6 @@ func (s *StoreGorm) GetPage(name string) (Page, error) {
 	if tx.Error != nil {
 		return Page{}, tx.Error
 	}
-	fmt.Println(page)
 	return page, nil
 }
 
@@ -65,7 +60,6 @@ func (s *StoreGorm) GetPageVersion(name string, version string) (Page, error) {
 	if tx.Error != nil {
 		return Page{}, tx.Error
 	}
-	fmt.Println(page)
 	return page, nil
 }
 

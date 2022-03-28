@@ -40,6 +40,7 @@ func Serve() {
 	if err != nil {
 		log.Panicln(err)
 	}
+	Debug.Printf("test.db open\n")
 
 	// Echo instance
 	e := echo.New()

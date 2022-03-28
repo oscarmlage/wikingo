@@ -3,6 +3,8 @@
 ## General
 > General options
 - [ ] Flag to select store
+- [x] Flag that sets the debug mode
+- [ ] Flag to show the version
 - [ ] Config file (to select store and some other future options)
 - [ ] Proper logger
 - [ ] Makefile helper

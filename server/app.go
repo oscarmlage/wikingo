@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"strings"
@@ -23,12 +22,12 @@ func WikiPage(c echo.Context) error {
 	page_id := c.Param("page")
 	version := c.Param("version")
 	if version != "" {
-		fmt.Printf("version: %s", version)
+		Debug.Printf("version: %s", version)
 		page, err = store.GetPageVersion(page_id, version)
 		if err != nil {
 			// If record not found, show 404
 			if err.Error() == "record not found" {
-				return c.Render(http.StatusOK, "notfound.html", map[string]interface{}{
+				Debug.Printf("Page not found: %s/%s", page_id, version)
 				return c.Render(http.StatusNotFound, "404.html", map[string]interface{}{
 					"name": page_id,
 				})
@@ -40,13 +39,14 @@ func WikiPage(c echo.Context) error {
 		if err != nil {
 			// If record not found, show the create
 			if err.Error() == "record not found" {
+				Debug.Printf("Page not found: %s", page_id)
 				return c.Render(http.StatusOK, "notfound.html", map[string]interface{}{
 					"name": page_id,
 				})
 			}
 		}
 	}
-	fmt.Printf("res: %T\n", page)
+	Debug.Printf("res: %T\n", page)
 	body := strings.ReplaceAll(page.Body, "\r\n", "\n")
 	unsafe := blackfriday.Run([]byte(body))
 	html := bluemonday.UGCPolicy().SanitizeBytes(unsafe)
@@ -62,10 +62,10 @@ func WikiPageEdit(c echo.Context) error {
 	page_id := c.Param("page")
 	version := c.Param("version")
 	if version != "" {
-		fmt.Printf("version; %s\n", version)
+		Debug.Printf("version; %s\n", version)
 		page, err = store.GetPageVersion(page_id, version)
 	} else {
-		fmt.Println("No version")
+		Debug.Println("No version")
 		page, err = store.GetPage(page_id)
 	}
 	if err != nil {
@@ -75,13 +75,14 @@ func WikiPageEdit(c echo.Context) error {
 			if err != nil {
 				log.Panicln(err.Error())
 			}
+			Debug.Printf("Page %s created", page_id)
 			page, err = store.GetPage(page_id)
 			if err != nil {
 				log.Panicln(err)
 			}
 		}
 	}
-	fmt.Printf("res: %T\n", page)
+	Debug.Printf("res: %T\n", page)
 	return c.Render(http.StatusOK, "edit.html", map[string]interface{}{
 		"page": page,
 	})
@@ -104,7 +105,7 @@ func WikiList(c echo.Context) error {
 	if err != nil {
 		log.Panicln(err)
 	}
-	fmt.Printf("res: %T\n", pages)
+	Debug.Printf("res: %T\n", pages)
 	return c.Render(http.StatusOK, "list.html", map[string]interface{}{
 		"pages": pages,
 	})
