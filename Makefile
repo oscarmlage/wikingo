@@ -9,3 +9,6 @@ build:
 
 clean:
 	rm -f bin/wikingo
+
+changelog:
+	git log --oneline --decorate --pretty=format:'* %s' >>  CHANGELOG.md
