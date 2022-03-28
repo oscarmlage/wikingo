@@ -29,6 +29,7 @@ func WikiPage(c echo.Context) error {
 			// If record not found, show 404
 			if err.Error() == "record not found" {
 				return c.Render(http.StatusOK, "notfound.html", map[string]interface{}{
+				return c.Render(http.StatusNotFound, "404.html", map[string]interface{}{
 					"name": page_id,
 				})
 			}

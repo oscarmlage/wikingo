@@ -57,6 +57,7 @@ func Serve() {
 	templates["edit.html"] = template.Must(template.ParseFiles("views/edit.html", "views/base.html"))
 	templates["about.html"] = template.Must(template.ParseFiles("views/about.html", "views/base.html"))
 	templates["notfound.html"] = template.Must(template.ParseFiles("views/notfound.html", "views/base.html"))
+	templates["404.html"] = template.Must(template.ParseFiles("views/404.html", "views/base.html"))
 	e.Renderer = &TemplateRegistry{
 		templates: templates,
 	}
