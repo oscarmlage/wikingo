@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/oscarmlage/wikingo/model"
+
 	"github.com/labstack/echo/v4"
 	"github.com/microcosm-cc/bluemonday"
 	"github.com/russross/blackfriday/v2"
@@ -16,15 +18,31 @@ func WikiHome(c echo.Context) error {
 }
 
 func WikiPage(c echo.Context) error {
-	page_id := c.Param("page")
+	var page model.Page
 	var err error
-	page, err := store.GetPage(page_id)
-	if err != nil {
-		// If record not found, show the create
-		if err.Error() == "record not found" {
-			return c.Render(http.StatusOK, "notfound.html", map[string]interface{}{
-				"name": page_id,
-			})
+	page_id := c.Param("page")
+	version := c.Param("version")
+	if version != "" {
+		fmt.Printf("version: %s", version)
+		page, err = store.GetPageVersion(page_id, version)
+		if err != nil {
+			// If record not found, show 404
+			if err.Error() == "record not found" {
+				return c.Render(http.StatusOK, "notfound.html", map[string]interface{}{
+					"name": page_id,
+				})
+			}
+		}
+	} else {
+		var err error
+		page, err = store.GetPage(page_id)
+		if err != nil {
+			// If record not found, show the create
+			if err.Error() == "record not found" {
+				return c.Render(http.StatusOK, "notfound.html", map[string]interface{}{
+					"name": page_id,
+				})
+			}
 		}
 	}
 	fmt.Printf("res: %T\n", page)
@@ -38,9 +56,17 @@ func WikiPage(c echo.Context) error {
 }
 
 func WikiPageEdit(c echo.Context) error {
-	page_id := c.Param("page")
+	var page model.Page
 	var err error
-	page, err := store.GetPage(page_id)
+	page_id := c.Param("page")
+	version := c.Param("version")
+	if version != "" {
+		fmt.Printf("version; %s\n", version)
+		page, err = store.GetPageVersion(page_id, version)
+	} else {
+		fmt.Println("No version")
+		page, err = store.GetPage(page_id)
+	}
 	if err != nil {
 		// If record not found, create and show the form
 		if err.Error() == "record not found" {

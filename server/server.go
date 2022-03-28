@@ -64,8 +64,11 @@ func Serve() {
 	// Routes
 	e.GET("/", WikiHome)
 	e.GET("/:page", WikiPage)
+	e.GET("/:page/:version", WikiPage)
 	e.GET("/:page/edit", WikiPageEdit)
+	e.GET("/:page/:version/edit", WikiPageEdit)
 	e.POST("/:page/edit", WikiPagePostEdit)
+	e.POST("/:page/:version/edit", WikiPagePostEdit)
 	e.GET("/list", WikiList)
 	e.GET("/about", WikiAbout)
 	e.GET("/about/:id", WikiAbout)

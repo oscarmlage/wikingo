@@ -6,5 +6,6 @@ type Store interface {
 	AddPage(string, string) error
 	CreatePage(Page) error
 	GetPage(string) (Page, error)
+	GetPageVersion(string, string) (Page, error)
 	GetAllPages() ([]Page, error)
 }

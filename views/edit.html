@@ -9,6 +9,6 @@
         <textarea name="html">{{ .page.Body }}</textarea>
         <hr />
         <button>Save</button>
-        <a href="/{{ .page.Name }}">Cancel</a>
+        <a href="/{{ .page.Name }}/{{ .page.Version }}">Cancel</a>
     </form>
 {{end}}

@@ -6,7 +6,7 @@
     <h1>List</h1>
     <ul>
         {{ range .pages }}
-        <li><a href="{{ .Name }}">{{ .Name }}, v{{ .Version }}</a>.- {{ .Body }}</li>
+        <li><a href="{{ .Name }}/{{ .Version }}">{{ .Name }}, v{{ .Version }}</a>.- {{ .Body }}</li>
         {{ end }}
     </ul>
 {{end}}

@@ -45,13 +45,23 @@ func (s *StoreGorm) CreatePage(page Page) error {
 	newversion.Name = page.Name
 	newversion.Body = page.Body
 	newversion.Version = page.Version + 1
-	tx := s.db.Save(newversion)
+	tx := s.db.Create(&newversion)
 	return tx.Error
 }
 
 func (s *StoreGorm) GetPage(name string) (Page, error) {
 	var page Page
 	tx := s.db.Where("Name = ?", name).Order("Version desc").First(&page)
+	if tx.Error != nil {
+		return Page{}, tx.Error
+	}
+	fmt.Println(page)
+	return page, nil
+}
+
+func (s *StoreGorm) GetPageVersion(name string, version string) (Page, error) {
+	var page Page
+	tx := s.db.Where("Name = ?", name).Where("Version = ?", version).First(&page)
 	if tx.Error != nil {
 		return Page{}, tx.Error
 	}
