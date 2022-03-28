@@ -53,12 +53,12 @@ func Serve() {
 		"safeHTML": func(s string) template.HTML {
 			return template.HTML(s)
 		},
-	}).ParseFiles("views/page.html", "views/base.html"))
-	templates["list.html"] = template.Must(template.ParseFiles("views/list.html", "views/base.html"))
-	templates["edit.html"] = template.Must(template.ParseFiles("views/edit.html", "views/base.html"))
-	templates["about.html"] = template.Must(template.ParseFiles("views/about.html", "views/base.html"))
-	templates["notfound.html"] = template.Must(template.ParseFiles("views/notfound.html", "views/base.html"))
-	templates["404.html"] = template.Must(template.ParseFiles("views/404.html", "views/base.html"))
+	}).ParseFiles("templates/page.html", "templates/base.html"))
+	templates["list.html"] = template.Must(template.ParseFiles("templates/list.html", "templates/base.html"))
+	templates["edit.html"] = template.Must(template.ParseFiles("templates/edit.html", "templates/base.html"))
+	templates["about.html"] = template.Must(template.ParseFiles("templates/about.html", "templates/base.html"))
+	templates["notfound.html"] = template.Must(template.ParseFiles("templates/notfound.html", "templates/base.html"))
+	templates["404.html"] = template.Must(template.ParseFiles("templates/404.html", "templates/base.html"))
 	e.Renderer = &TemplateRegistry{
 		templates: templates,
 	}
