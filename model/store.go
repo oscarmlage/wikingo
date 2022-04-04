@@ -8,4 +8,5 @@ type Store interface {
 	GetPage(string) (Page, error)
 	GetPageVersion(string, string) (Page, error)
 	GetAllPages() ([]Page, error)
+	GetPageHistory(name string) ([]Page, error)
 }

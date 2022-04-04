@@ -100,6 +100,20 @@ func WikiPagePostEdit(c echo.Context) error {
 	return c.Redirect(http.StatusMovedPermanently, "/"+page.Name)
 }
 
+func WikiPageHistory(c echo.Context) error {
+	page_id := c.Param("page")
+	pages, err := store.GetPageHistory(page_id)
+	if err != nil {
+		log.Panicln(err)
+	}
+	Debug.Printf("res: %T\n", pages)
+	// Debug.Println(pages)
+	return c.Render(http.StatusOK, "list.html", map[string]interface{}{
+		"title": page_id,
+		"pages": pages,
+	})
+}
+
 func WikiList(c echo.Context) error {
 	pages, err := store.GetAllPages()
 	if err != nil {

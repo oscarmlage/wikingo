@@ -65,7 +65,16 @@ func (s *StoreGorm) GetPageVersion(name string, version string) (Page, error) {
 
 func (s *StoreGorm) GetAllPages() ([]Page, error) {
 	var pages []Page
-	tx := s.db.Find(&pages)
+	tx := s.db.Select("*, max(Version)").Group("Name").Find(&pages)
+	if tx.Error != nil {
+		return []Page{}, tx.Error
+	}
+	return pages, nil
+}
+
+func (s *StoreGorm) GetPageHistory(name string) ([]Page, error) {
+	var pages []Page
+	tx := s.db.Debug().Where("Name = ?", name).Order("Version desc").Find(&pages)
 	if tx.Error != nil {
 		return []Page{}, tx.Error
 	}

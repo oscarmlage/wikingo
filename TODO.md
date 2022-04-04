@@ -6,6 +6,7 @@
 - [x] Flag that sets the debug mode
 - [x] Flag to show the version
 - [x] Page versioning in a really basic way
+- [x] Version listing
 - [x] Makefile helper
 - [ ] CI (gofmt, golint, more)?
 

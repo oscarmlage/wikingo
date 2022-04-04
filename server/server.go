@@ -68,6 +68,7 @@ func Serve() {
 	e.GET("/:page", WikiPage)
 	e.GET("/:page/:version", WikiPage)
 	e.GET("/:page/edit", WikiPageEdit)
+	e.GET("/:page/history", WikiPageHistory)
 	e.GET("/:page/:version/edit", WikiPageEdit)
 	e.POST("/:page/edit", WikiPagePostEdit)
 	e.POST("/:page/:version/edit", WikiPagePostEdit)

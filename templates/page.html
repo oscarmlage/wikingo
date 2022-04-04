@@ -7,6 +7,9 @@
     {{ .html | safeHTML }}
     <hr />
     <a href="/{{ .page.Name }}/{{ .page.Version }}/edit">Edit</a>
+    {{ if gt .page.Version 1 }}
+    <a href="/{{ .page.Name }}/history">History</a>
+    {{ end }}
     <p style="float: right">Last modified: {{ .page.UpdatedAt }}</p>
     <p style="float: right">*{{ .page.Version }}*</p>
 {{end}}
